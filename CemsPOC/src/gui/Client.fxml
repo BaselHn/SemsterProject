@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="347.0" prefWidth="721.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ClientController">
+   <children>
+      <Button fx:id="update" layoutX="502.0" layoutY="285.0" mnemonicParsing="false" onAction="#UpdateTable" prefHeight="25.0" prefWidth="149.0" text="Update " />
+      <TableView fx:id="dbTable" layoutX="14.0" layoutY="22.0" onMouseClicked="#handleDataRowClick" prefHeight="288.0" prefWidth="471.0">
+        <columns>
+          <TableColumn fx:id="IDheadline" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="SubjectHeadline" prefWidth="75.0" text="Subject" />
+            <TableColumn fx:id="CourseHeadline" prefWidth="75.0" text="Course" />
+            <TableColumn fx:id="slvtHeadline" prefWidth="127.0" text="Solving Time [Min]" />
+            <TableColumn fx:id="mrkquesHeadline" prefWidth="116.0" text="Marks per question" />
+        </columns>
+      </TableView>
+      <TextField fx:id="IdField" layoutX="502.0" layoutY="39.0" />
+      <TextField fx:id="subjectFileld" layoutX="502.0" layoutY="85.0" />
+      <TextField fx:id="courseField" layoutX="502.0" layoutY="130.0" />
+      <TextField fx:id="slvTField" layoutX="502.0" layoutY="174.0" />
+      <TextField fx:id="mrkQField" layoutX="502.0" layoutY="217.0" />
+   </children>
+</AnchorPane>
