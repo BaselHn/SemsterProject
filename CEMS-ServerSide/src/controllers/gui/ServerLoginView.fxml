@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="usrNameLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerLoginController">
+   <children>
+      <Label fx:id="hostLabel" layoutX="26.0" layoutY="62.0" prefHeight="17.0" prefWidth="41.0" text="Host :" />
+      <Label layoutX="26.0" layoutY="101.0" text="Username : " />
+      <Label fx:id="passwordLabel" layoutX="26.0" layoutY="147.0" prefHeight="17.0" prefWidth="63.0" text="Password :" />
+      <Label fx:id="schemeLebal" layoutX="19.0" layoutY="197.0" prefHeight="17.0" prefWidth="55.0" text="Scheme :" />
+      <Label fx:id="srvrConLabel" contentDisplay="CENTER" layoutX="18.0" layoutY="241.0" prefHeight="25.0" prefWidth="142.0" text="Server Connection " textFill="#08a7e1" />
+      <Label fx:id="srvrPortLabel" layoutX="26.0" layoutY="288.0" text="Port :" />
+      <Button fx:id="connectButton" layoutX="46.0" layoutY="356.0" mnemonicParsing="false" onAction="#handleConnectButtonClick" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #2AC357;" text="Connect" />
+      <Button fx:id="disconnectButton" layoutX="215.0" layoutY="356.0" mnemonicParsing="false" onAction="#handleDisconnetButtonClick" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #FF6767;" text="Disconnect" />
+      <TextArea fx:id="srvrTxtArea" layoutX="354.0" layoutY="96.0" prefHeight="200.0" prefWidth="260.0" />
+      <Label fx:id="srvrTxtAreaLbl" layoutX="354.0" layoutY="62.0" prefHeight="17.0" prefWidth="92.0" text="Server log" />
+      <TextField fx:id="hostTxtfld" layoutX="100.0" layoutY="58.0" />
+      <TextField fx:id="usrnameTxtFld" layoutX="100.0" layoutY="97.0" />
+      <TextField fx:id="schmTxtFld" layoutX="97.0" layoutY="193.0" />
+      <TextField fx:id="srvrPortTxtFld" layoutX="67.0" layoutY="284.0" />
+      <PasswordField fx:id="passWrdFld" layoutX="100.0" layoutY="143.0" />
+      <Label fx:id="dbConLbl" layoutX="29.0" layoutY="25.0" prefHeight="17.0" prefWidth="121.0" text="Database connection " textFill="#cf0e0e" />
+   </children>
+</AnchorPane>
