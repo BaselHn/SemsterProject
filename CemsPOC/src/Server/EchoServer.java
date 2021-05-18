@@ -3,12 +3,8 @@
 // license found at www.lloseng.com 
 package Server;
 
-import java.io.*;
-import java.net.InetAddress;
-import java.util.Vector;
 
-import gui.ServerController;
-import javafx.scene.Scene;
+import java.net.InetAddress;
 import ocsf.server.*;
 
 /**
@@ -64,7 +60,6 @@ public class EchoServer extends AbstractServer
    */
   public void handleMessageFromClient (Object msg, ConnectionToClient client)
   {
-	 int flag=0;
 	    System.out.println("Message received: " + msg + " from " + client);
 	    String name =  client.getName();
 	    InetAddress ipAddr = client.getInetAddress();
