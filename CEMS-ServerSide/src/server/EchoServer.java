@@ -77,6 +77,8 @@ public class EchoServer extends AbstractServer
 	    IpStr = ipAddr.toString();
 	    HostName = name;
 	    clientIsConnected = true;
+	    
+	    this.sendToAllClients("hello from server");
 	  
   }
    
