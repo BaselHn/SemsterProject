@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="328.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TeacherMainViewController">
+   <children>
+      <Label fx:id="titleLbl" layoutX="6.0" layoutY="6.0" prefHeight="17.0" prefWidth="115.0" text="Teacher Form " textFill="#0e6ac6">
+         <font>
+            <Font name="Bell MT Italic" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="addQuesBtn" layoutX="14.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleAddQuesBtnClick" prefHeight="25.0" prefWidth="135.0" text="Add new question " />
+      <Button fx:id="buildTstBtn" layoutX="14.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleBuildTstBtnClick" prefHeight="25.0" prefWidth="135.0" text="Build Test" />
+   </children>
+</AnchorPane>
