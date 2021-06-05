@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="397.0" prefWidth="192.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddQuesController">
+   <children>
+      <TextField fx:id="quesTxtFld" layoutX="21.0" layoutY="49.0" promptText="Enter Question " />
+      <TextField fx:id="answ1TxtFld" layoutX="21.0" layoutY="124.0" promptText="Enter Answer 1" />
+      <TextField fx:id="answ2TxtFld" layoutX="21.0" layoutY="161.0" promptText="Enter Answer 2" />
+      <TextField fx:id="answ3TxtFld" layoutX="21.0" layoutY="199.0" promptText="Enter Answer 3" />
+      <Button fx:id="submtButn" layoutX="43.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleSubmitButtonClick" text="Submit" />
+      <TextField fx:id="instrctTxtFld" layoutX="21.0" layoutY="85.0" promptText="Enter Instructions" />
+      <TextField fx:id="answ4TxtFld" layoutX="21.0" layoutY="231.0" promptText="Enter Answer 4" />
+      <TextField fx:id="rtAnsTxtFld" layoutX="22.0" layoutY="267.0" promptText="Add right answer" />
+      <TextField fx:id="tchTxtFld" layoutX="21.0" layoutY="306.0" promptText="Enter your name" />
+      <TextField fx:id="quesIdTxtFld" layoutX="23.0" layoutY="14.0" promptText="Enter question ID" />
+   </children>
+</AnchorPane>

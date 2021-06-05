@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="397.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BuildExamController">
+   <children>
+      <TextField fx:id="qScrTxtFld" layoutX="29.0" layoutY="75.0" promptText="Enter question score" />
+      <TextField fx:id="qIdTxtFld" layoutX="29.0" layoutY="31.0" promptText="Question ID" />
+      <Button fx:id="addQuesButton" layoutX="29.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleAddQuesButtonClick" text="AddQuestion" />
+      <TextField fx:id="slvTmTxtFld" layoutX="29.0" layoutY="186.0" promptText="Enter Solve Time" />
+      <TextField fx:id="stdInstTxtFld" layoutX="29.0" layoutY="220.0" prefHeight="25.0" prefWidth="185.0" promptText="Enster Instruction for student" />
+      <TextField fx:id="tchInstTxtFld" layoutX="29.0" layoutY="260.0" prefHeight="25.0" prefWidth="185.0" promptText="Enster Instruction for teacher" />
+      <TextField fx:id="exeTxtFld" layoutX="29.0" layoutY="298.0" promptText="Enter exe code" />
+      <Button fx:id="subButton" layoutX="29.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleSubmitButtonClick" prefHeight="25.0" prefWidth="149.0" text="Submit" />
+      <TableView fx:id="quesTable" layoutX="251.0" layoutY="37.0" onMouseClicked="#handleDataRowClick" prefHeight="323.0" prefWidth="201.0">
+        <columns>
+          <TableColumn fx:id="quesID" prefWidth="74.0" text="ID" />
+          <TableColumn fx:id="questionsCl" prefWidth="126.0" text="Question" />
+        </columns>
+      </TableView>
+      <TextField fx:id="exmIdTxtFld" layoutX="29.0" layoutY="149.0" promptText="Enter exam id" />
+   </children>
+</AnchorPane>

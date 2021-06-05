@@ -75,7 +75,7 @@ public class ClientConnection implements ChatIF
 	  return ChatClient.isServerResponed();
   }
   
-  public String getMsg()
+  public Object getMsg()
   {
 	  return ChatClient.srvrMsg;
   }

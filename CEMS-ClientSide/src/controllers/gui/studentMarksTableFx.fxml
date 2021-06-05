@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="235.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentMarksTableController">
+   <children>
+      <TableView fx:id="marksTable" layoutX="-7.0" layoutY="1.0" prefHeight="287.0" prefWidth="239.0">
+        <columns>
+          <TableColumn fx:id="idHdLin" prefWidth="100.0" text="ID" />
+          <TableColumn fx:id="exmIdHdline" prefWidth="60.0" text="Exam ID" />
+          <TableColumn fx:id="mrkHdline" prefWidth="75.0" text="Mark" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -30,7 +30,7 @@ public class ChatClient extends AbstractClient
   ChatIF clientUI; 
   public static boolean awaitResponse = false;
   public static ResultSet rs;
-  public static String srvrMsg ="";
+  public static Object srvrMsg ="";
 
   //Constructors ****************************************************
   
@@ -60,7 +60,7 @@ public class ChatClient extends AbstractClient
   {
 	 //System.out.println("Your password received");
 	 //System.out.println(msg);
-	 srvrMsg = (String) msg;
+	 srvrMsg =  msg;
 	 awaitResponse = false;
   }
    

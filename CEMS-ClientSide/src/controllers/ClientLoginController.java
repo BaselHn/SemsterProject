@@ -3,9 +3,12 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import com.mysql.cj.protocol.Message;
 
 import client.ClientUI;
+import entities.User;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -22,7 +25,8 @@ import javafx.scene.layout.Pane;
 
 
 public class ClientLoginController implements Initializable{
-
+    
+	public static User loggedUser = new User();
 	@FXML
 	private Label signInLbl;
 	
@@ -43,6 +47,11 @@ public class ClientLoginController implements Initializable{
 
     @FXML
     private Button loginTchBtn;
+    @FXML
+    private Label idLbl;
+
+    @FXML
+    private TextField idTxt;
 
     @FXML
     void handleLoginStudentButton(ActionEvent event) {
@@ -52,24 +61,39 @@ public class ClientLoginController implements Initializable{
     	
     	String pswrd   = pswrdFld.getText();
     	
-    	ClientUI.chat.accept(usrname + "/" + pswrd);
+    	String id = idTxt.getText();
     	
-    	while(!(ClientUI.chat.IsRespone()));    	
-    	System.out.println("You got message" + ClientUI.chat.getMsg());
+    	ClientUI.chat.accept("login" + "," + usrname + "/" + pswrd + "/" + "Student");
     	
-    	try
-		{
-			((Node) event.getSource()).getScene().getWindow().hide(); 
-	    	Pane root = FXMLLoader.load(getClass().getResource("gui/StudentMainViewFx.fxml"));//build the gui
-	    	Scene scene = new Scene(root);
-	   		Stage stage = new Stage();
-	   		stage.setScene(scene);
-			stage.show();
-	 	}
-	    catch(Exception e)
-		  {
-	       	e.printStackTrace();
-		  }		
+    	loggedUser.personName = usrname;
+    	loggedUser.password = pswrd;
+    	loggedUser.type = "Student";
+    	loggedUser.personId = id;
+    	
+    	while(!(ClientUI.chat.IsRespone()));  
+    	
+    	String msgRcvd = (String)ClientUI.chat.getMsg();
+    	System.out.println("You got message" + msgRcvd);
+    	
+    	if(msgRcvd.equals("LoginSucced"))
+    	{
+	    	try
+			{
+				((Node) event.getSource()).getScene().getWindow().hide(); 
+		    	Pane root = FXMLLoader.load(getClass().getResource("gui/StudentMainViewFx.fxml"));//build the gui
+		    	Scene scene = new Scene(root);
+		   		Stage stage = new Stage();
+		   		stage.setScene(scene);
+				stage.show();
+		 	}
+		    catch(Exception e)
+			  {
+		       	e.printStackTrace();
+			  }
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(null,"Login Error Username/Password not valid","error",JOptionPane.INFORMATION_MESSAGE);
+		}
     	
     	//while()
 
@@ -80,24 +104,38 @@ public class ClientLoginController implements Initializable{
     	
     	String usrname = usrnameTxtFld.getText();
     	String pswrd   = pswrdFld.getText();
+    	String id = idTxt.getText();
     	
-    	ClientUI.chat.accept(usrname + "/" + pswrd);
+    	loggedUser.personName = usrname;
+    	loggedUser.password = pswrd;
+    	loggedUser.type = "Teacher";
+    	loggedUser.personId = id;
+    	
+    	ClientUI.chat.accept("login" + "," + usrname + "/" + pswrd +"/" + "Teacher");
     	while(!(ClientUI.chat.IsRespone()));    	
-    	System.out.println("You got message" + ClientUI.chat.getMsg());
     	
-    	try
-		{
-			((Node) event.getSource()).getScene().getWindow().hide(); 
-	    	Pane root = FXMLLoader.load(getClass().getResource("gui/TeacherMainViewFx.fxml"));//build the gui
-	    	Scene scene = new Scene(root);
-	   		Stage stage = new Stage();
-	   		stage.setScene(scene);
-			stage.show();
-	 	}
-	    catch(Exception e)
-		  {
-	       	e.printStackTrace();
-		  }		
+    	String msgRcvd = (String)ClientUI.chat.getMsg();
+    	System.out.println("You got message" + msgRcvd);
+    	
+    	if(msgRcvd.equals("LoginSucced"))
+    	{
+	    	try
+			{
+				((Node) event.getSource()).getScene().getWindow().hide(); 
+		    	Pane root = FXMLLoader.load(getClass().getResource("gui/TeacherMainViewFx.fxml"));//build the gui
+		    	Scene scene = new Scene(root);
+		   		Stage stage = new Stage();
+		   		stage.setScene(scene);
+				stage.show();
+		 	}
+		    catch(Exception e)
+			  {
+		       	e.printStackTrace();
+			  }	
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(null,"Login Error Username/Password not valid","error",JOptionPane.INFORMATION_MESSAGE);
+		}
     	
     }
 	
