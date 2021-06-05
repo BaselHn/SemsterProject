@@ -175,11 +175,15 @@ public class ServerLoginController  implements Initializable{
 	@Override
     public void initialize(URL location, ResourceBundle resources)
     {
-		 hostTxtfld.setPromptText("Enter Host name");
-		 usrnameTxtFld.setPromptText("Enter Username");
+		 //hostTxtfld.setPromptText("Enter Host name");
+		 hostTxtfld.setText("localhost");
+		 //usrnameTxtFld.setPromptText("Enter Username");
+		 usrnameTxtFld.setText("root");
 		 passWrdFld.setPromptText("Enter password");
-		 schmTxtFld.setPromptText("Enter DB scheme");
-		 srvrPortTxtFld.setPromptText("Set server port");
+		 //schmTxtFld.setPromptText("Enter DB scheme");
+		 schmTxtFld.setText("cems_db");
+		 //srvrPortTxtFld.setPromptText("Set server port");
+		 srvrPortTxtFld.setText("5555");
     }
 	
 	 public void sendMessageToLog(String message)
