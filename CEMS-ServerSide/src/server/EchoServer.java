@@ -4,6 +4,7 @@
 package server;
 
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import entities.ExamResult;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ocsf.server.*;
+
 
 
 /**
@@ -88,6 +90,7 @@ public class EchoServer extends AbstractServer
 	    
 	    msgStr = (String)msg;
 	    
+	    
 	    System.out.println("************************************************");
 	    
 	    List <String> msgRcvd = Arrays.asList(msgStr.split("\\s*,\\s*"));
@@ -142,6 +145,12 @@ public class EchoServer extends AbstractServer
 							  if( usr.equals(items.get(0)) && psw.equals(items.get(1)) && type.equals(items.get(2)) )
 						      {
 								  this.sendToAllClients("LoginSucced");
+								 /* try {
+										client.sendToClient("LoginSucced");
+									} catch (IOException e2) {
+										// TODO Auto-generated catch block
+										e2.printStackTrace();
+									}*/
 						      }
 							  else 
 							  {
@@ -261,9 +270,12 @@ public class EchoServer extends AbstractServer
 				 System.out.println(items.get(3));
 				 System.out.println(items.get(4));	
 				 System.out.println(items.get(5));
+				 System.out.println(items.get(6));	
+				 System.out.println(items.get(7));
+				 System.out.println(items.get(8));
 				 
 				 
-				 String query = "INSERT INTO exams (ID, Questions, Time, IntrStd,IntrTch, ExecCode) VALUES(?,?,?,?,?,?);";
+				 String query = "INSERT INTO exams (ID, Questions, Time, IntrStd,IntrTch, ExecCode, Teacher, TeacherId, IsLocked) VALUES(?,?,?,?,?,?,?,?,?);";
 				 
 				 parameters.add(items.get(0));
 				 parameters.add(items.get(1));
@@ -271,6 +283,9 @@ public class EchoServer extends AbstractServer
 				 parameters.add(items.get(3));
 				 parameters.add(items.get(4));
 				 parameters.add(items.get(5));
+				 parameters.add(items.get(6));
+				 parameters.add(items.get(7));
+				 parameters.add(items.get(8));
 				 
 				 updateTable(query, parameters);
 				 
@@ -294,7 +309,8 @@ public class EchoServer extends AbstractServer
 						{
 						    
 						     msgSnd +=  resultSet.getString("ID") + "," + resultSet.getString("Questions") + "," + resultSet.getString("Time") + "," 
-						    		 	+ resultSet.getString("IntrStd") + ","+ resultSet.getString("IntrTch") + "," + resultSet.getString("ExecCode")  +"/";
+						    		 	+ resultSet.getString("IntrStd") + ","+ resultSet.getString("IntrTch") + "," + resultSet.getString("ExecCode")  +"," +
+						    		 	resultSet.getString("Teacher") + "," + resultSet.getString("TeacherId") + "/";
 						}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -332,7 +348,218 @@ public class EchoServer extends AbstractServer
 				
 			    msgSnd = msgSnd.substring(0, msgSnd.length() - 1);
 				this.sendToAllClients(msgSnd);
+			
 			}
+			
+			case "SubmitExam":
+			{
+				List<String> items = Arrays.asList(msgRcvd.get(1).split("\\s*/\\s*"));
+				 System.out.println(items.get(0)); // StudentID
+				 System.out.println(items.get(1)); // ExamID
+				 System.out.println(items.get(2)); // Questions
+				 System.out.println(items.get(3)); // Teacher
+				 System.out.println(items.get(4)); // TeacherId	
+				 System.out.println(items.get(5)); // Mark
+				 System.out.println(items.get(6)); // Aproved	
+				 System.out.println(items.get(7)); // Notes
+				 System.out.println(items.get(8)); // SolvingTime
+				 
+				 
+				 
+				 String query = "INSERT INTO solved_exams (StudentID, ExamID, Questions, Teacher,TeacherId, Mark, Aproved, Notes, SolvingTime) VALUES(?,?,?,?,?,?,?,?,?);";
+				 
+				 parameters.add(items.get(0));
+				 parameters.add(items.get(1));
+				 parameters.add(items.get(2));
+				 parameters.add(items.get(3));
+				 parameters.add(items.get(4));
+				 parameters.add(items.get(5));
+				 parameters.add(items.get(6));
+				 parameters.add(items.get(7));
+				 parameters.add(items.get(8));
+				 
+				 updateTable(query, parameters);
+				 
+				 this.sendToAllClients("Exam submitted");
+			}
+			break;
+			
+			case "LockExam":
+			{
+				System.out.println(msgRcvd.get(1));
+				
+				parameters.add("True");
+				parameters.add(msgRcvd.get(1));
+				
+				String query = "UPDATE exams SET IsLocked = ? WHERE ID = ?";
+				
+				updateTable(query, parameters);
+				
+				 this.sendToAllClients("ExamLocked");
+				 
+			}
+			break;
+			
+			case "IsExamLocked":
+			{
+				 parameters.add(msgRcvd.get(1));
+				
+				 String query="SELECT IsLocked FROM exams WHERE ID = ? ";
+			    
+			     ResultSet resultSet = selectWithParameters(query, parameters);
+			     
+			     String msgSnd = "";
+			     try {
+					while(resultSet.next())
+						{
+						  if (resultSet.getString("IsLocked").equals("True"))
+						  {
+							  msgSnd += "ExamLocked";
+						  }
+						  else {
+							  msgSnd += "NotLocked";
+						 }
+						}
+			     }catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			     
+			     this.sendToAllClients(msgSnd);
+			}
+			break;
+			
+			
+			case "IsTimeUpdated":
+			{
+				  System.out.println(msgRcvd.get(1));
+				  parameters.add(msgRcvd.get(1));
+				
+				 String query="SELECT newTimeApproved FROM exams WHERE ID = ? ";
+			    
+			     ResultSet resultSet = selectWithParameters(query, parameters);
+			     
+			     
+			     boolean flag = false;
+			     String msgSnd = "";
+			     
+			     try {
+					while(resultSet.next())
+						{
+						  if (resultSet.getString("newTimeApproved").equals("True"))
+						  {
+							     flag = true;
+						  }
+						}
+			     }catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			     
+			     
+			     System.out.println("The flag is:" + flag);
+			     
+			     if (flag == true)
+			     {
+				     query="SELECT newTime FROM exams WHERE ID = ? ";
+					    
+				     resultSet = selectWithParameters(query, parameters);
+				     
+				   try {
+				     while(resultSet.next())
+						{
+				    	 	msgSnd = "TimeUpdated" + "," +resultSet.getString("newTime");
+						}
+			     	}catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			     else {
+			    	 msgSnd = "TimeNotUpdated" + "," + "0";
+				}
+			     
+			     this.sendToAllClients(msgSnd);
+			}
+			break;
+			
+			case "NeedTimeAproved":
+			{
+				parameters.add("True");
+				
+				String query="SELECT * FROM need_update_time WHERE WaitForApprove = ? ";
+				
+				ResultSet resultSet = selectWithParameters(query, parameters);
+				
+				String msgSnd = "***";
+				try {
+				     while(resultSet.next())
+						{
+				    	 	msgSnd = resultSet.getString("examID") + "," + resultSet.getString("Reason") + "," + resultSet.getString("NewTime") + "/";
+						}
+			     	}catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+				  msgSnd = msgSnd.substring(0, msgSnd.length() - 1);
+				  this.sendToAllClients(msgSnd);
+
+			}
+			
+			
+			case "SetNeedTimeAproved":
+			{
+				System.out.println(msgRcvd.get(1));
+				
+				parameters.add("False");
+				parameters.add(msgRcvd.get(1));
+				
+				String query = "UPDATE need_update_time SET WaitForApprove = ? WHERE examID = ?";
+				
+				updateTable(query, parameters);
+				
+				 this.sendToAllClients("Set");
+			}
+			break;
+			
+			
+			case "AprroveSetTime":
+			{
+				System.out.println(msgRcvd.get(1));
+				List<String> items = Arrays.asList(msgRcvd.get(1).split("\\s*/\\s*"));
+				
+				parameters.add(items.get(1));
+				parameters.add("True");
+				parameters.add(items.get(0));
+				
+				String query = "UPDATE exams SET newTime = ? , newTimeApproved = ? WHERE ID = ?";
+				
+				updateTable(query, parameters);
+				
+				 this.sendToAllClients("Set");
+			}
+			break;
+			
+			case "RequestTimeChange":
+			{
+				System.out.println(msgRcvd.get(1));
+				List<String> items = Arrays.asList(msgRcvd.get(1).split("\\s*/\\s*"));
+				System.out.println(items.get(0)); // examID
+				System.out.println(items.get(1)); // Reason
+				System.out.println(items.get(2)); // newTime
+				
+				parameters.add(items.get(0));
+				parameters.add(items.get(1));
+				parameters.add(items.get(2));
+				parameters.add("True");
+			
+				
+				String query = "INSERT INTO need_update_time (examID, Reason, NewTime,WaitForApprove) VALUES(?,?,?,?);";
+				
+				updateTable(query, parameters);
+			}
+			break;
 			
 			default:
 				break;
