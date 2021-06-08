@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="328.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagerMainViewController">
+   <children>
+      <TextField fx:id="tChTxtFld" layoutX="43.0" layoutY="64.0" prefHeight="25.0" prefWidth="244.0" promptText="Why time changed" />
+      <Button fx:id="aprvChngBtn" layoutX="78.0" layoutY="158.0" mnemonicParsing="false" onAction="#handleAprroveButtonClick" prefHeight="25.0" prefWidth="137.0" text="Aprrove Change" />
+      <TextField fx:id="arvpTxtFld" layoutX="72.0" layoutY="107.0" promptText="Approve change  Yes\No" />
+   </children>
+</AnchorPane>

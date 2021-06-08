@@ -81,7 +81,10 @@ public class BuildExamController implements Initializable{
     	msgToSend += slvTmTxtFld.getText() + "/";
     	msgToSend += stdInstTxtFld.getText() + "/";
     	msgToSend += tchInstTxtFld.getText()+ "/";
-    	msgToSend += exeTxtFld.getText(); 
+    	msgToSend += exeTxtFld.getText() + "/";
+    	msgToSend += ClientLoginController.loggedUser.personName + "/";
+    	msgToSend += ClientLoginController.loggedUser.personId + "/";
+    	msgToSend += "False";
     	
     	ClientUI.chat.accept(msgToSend);
     	while(!(ClientUI.chat.IsRespone()));    

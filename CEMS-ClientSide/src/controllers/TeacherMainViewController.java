@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 public class TeacherMainViewController {
@@ -27,6 +28,27 @@ public class TeacherMainViewController {
     @FXML
     private ImageView imgViemTech;
     
+    @FXML
+    private TextField exLckTxtFld;
+
+    @FXML
+    private Button lckexmBtn;
+    
+    @FXML
+    private Button rvwExmBtn;
+    
+    @FXML
+    private TextField idCgTime;
+
+    @FXML
+    private TextField nTimeTxtFld;
+
+    @FXML
+    private Button rqTimeChngBtn;
+    
+    @FXML
+    private TextField chngRsnTxtFld;
+    
     ObservableList<Question> oblist;
 
     @FXML
@@ -35,8 +57,7 @@ public class TeacherMainViewController {
         AddQuesController ctrlAddQuesController = new AddQuesController();
         
         ctrlAddQuesController.openAddQuestionForm();
-        
-        
+            
     }
 
     @FXML
@@ -69,12 +90,53 @@ public class TeacherMainViewController {
     									 items.get(5), 
     									 items.get(6), 
     									 items.get(7), 
-    									 items.get(8));
+    									 items.get(8),
+    									 "0");
     		
     		oblist.add(ques);	
     	}
         
     	ctrlBuildExamController.openBuildExamForm(oblist);
+    }
+    
+    @FXML
+    void handleLockExamButtonClick(ActionEvent event) {
+    	
+    	String msgToSend = "LockExam,";
+    	
+    	String examId = exLckTxtFld.getText();
+    	
+    	msgToSend += examId;
+    	
+    	ClientUI.chat.accept(msgToSend);
+    	
+    	while(!(ClientUI.chat.IsRespone())); 
+    	
+    	String rcv = (String)ClientUI.chat.getMsg();
+    	System.out.println("You got message" + rcv);
+
+    }
+    
+    @FXML
+    void handleReviewExamButtonClick(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void handleReqTimeChngBtnClick(ActionEvent event) {
+    	
+    	String MsgToSend = "RequestTimeChange,";
+    	
+    	MsgToSend += idCgTime.getText() + "/";
+    	
+    	MsgToSend += chngRsnTxtFld.getText() + "/";
+    	
+    	MsgToSend += nTimeTxtFld.getText();
+    	
+    	ClientUI.chat.accept(MsgToSend);
+    	
+    	while(!(ClientUI.chat.IsRespone())); 
+
     }
 
 }

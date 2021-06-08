@@ -11,6 +11,7 @@ public class Question {
     private String Answ_4;
     private String rightAnsw;
     private String  Teacher;
+    private String  score;
     
     
     public Question(String ID, 
@@ -21,7 +22,8 @@ public class Question {
     				String Answ_3, 
     				String Answ_4, 
     				String rightAnsw, 
-    				String Teacher)
+    				String Teacher,
+    				String score)
     {
     	this.ID          = ID; 
     	this.Question    = Question;
@@ -32,6 +34,7 @@ public class Question {
     	this.Answ_4 	 = Answ_4;
     	this.rightAnsw   = rightAnsw;
     	this.Teacher     = Teacher;
+    	this.score       = score;
     }
     
 	public String getID() {
@@ -89,6 +92,14 @@ public class Question {
 
 	public void setTeacher(String teacher) {
 		Teacher = teacher;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
 	}
     
 }

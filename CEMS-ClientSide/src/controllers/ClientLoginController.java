@@ -52,6 +52,48 @@ public class ClientLoginController implements Initializable{
 
     @FXML
     private TextField idTxt;
+    
+    @FXML
+    private Button lgnMngrBtn;
+
+    @FXML
+    void handleLoginAsMangerButton(ActionEvent event) {
+    	String usrname = usrnameTxtFld.getText();
+    	String pswrd   = pswrdFld.getText();
+    	String id = idTxt.getText();
+    	
+    	loggedUser.personName = usrname;
+    	loggedUser.password = pswrd;
+    	loggedUser.type = "Teacher";
+    	loggedUser.personId = id;
+    	
+    	ClientUI.chat.accept("login" + "," + usrname + "/" + pswrd +"/" + "Manager");
+    	while(!(ClientUI.chat.IsRespone()));    	
+    	
+    	String msgRcvd = (String)ClientUI.chat.getMsg();
+    	System.out.println("You got message" + msgRcvd);
+    	
+    	if(msgRcvd.equals("LoginSucced"))
+    	{
+	    	try
+			{
+				((Node) event.getSource()).getScene().getWindow().hide(); 
+				
+				ManagerMainViewController ctrl = new ManagerMainViewController();
+				ctrl.openManagerForm();
+		    	
+		 	}
+		    catch(Exception e)
+			  {
+		       	e.printStackTrace();
+			  }	
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(null,"Login Error Username/Password not valid","error",JOptionPane.INFORMATION_MESSAGE);
+		}
+    	
+
+    }
 
     @FXML
     void handleLoginStudentButton(ActionEvent event) {

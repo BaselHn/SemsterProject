@@ -102,6 +102,8 @@ public class StudentMainViewController {
     		System.out.println(items.get(3));
     		System.out.println(items.get(4));
     		System.out.println(items.get(5));
+    		System.out.println(items.get(6));
+    		System.out.println(items.get(7));
     	}
     	
     	SolveExamController ctrl = new SolveExamController();
