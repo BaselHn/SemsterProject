@@ -21,9 +21,9 @@
          </image>
       </ImageView>
       <Button fx:id="myMarksBtn" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" onAction="#handleMyMarksBtnClick" prefHeight="25.0" prefWidth="86.0" text="My marks" />
-      <TextField fx:id="examCodeTxtFld" layoutX="11.0" layoutY="145.0" promptText="Enter exam code" />
-      <Button fx:id="strtExnBtn" layoutX="11.0" layoutY="175.0" mnemonicParsing="false" onAction="#handleStartExmBtn" prefHeight="25.0" prefWidth="86.0" text="Start exam" />
+      <TextField fx:id="examCodeTxtFld" layoutX="8.0" layoutY="106.0" promptText="Enter exam code" />
+      <Button fx:id="strtExnBtn" layoutX="11.0" layoutY="145.0" mnemonicParsing="false" onAction="#handleStartExmBtn" prefHeight="25.0" prefWidth="129.0" text="Start exam online" />
       <AnchorPane focusTraversable="true" layoutX="328.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
-      <TextField fx:id="idTxtFld" layoutX="11.0" layoutY="111.0" promptText="Enter ID" />
+      <Button fx:id="StrtExmMnlBtn" layoutX="11.0" layoutY="194.0" mnemonicParsing="false" onAction="#handleStatExamManualClick" prefHeight="25.0" prefWidth="129.0" text="Strat exam mnual" />
    </children>
 </AnchorPane>

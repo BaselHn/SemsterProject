@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,6 +24,7 @@ import javafx.stage.Stage;
 
 public class StudentMainViewController {
 
+	public static String exmCode;
     @FXML
     private Label stdntFrmTlt;
     
@@ -37,6 +39,9 @@ public class StudentMainViewController {
 
     @FXML
     private Button strtExnBtn;
+    
+    @FXML
+    private Button StrtExmMnlBtn;
      
     
     ObservableList<ExamResult> oblist;
@@ -110,5 +115,25 @@ public class StudentMainViewController {
     	
     	ctrl.openStartSolvingForm(rcv);
     	
+    }
+    
+    @FXML
+    void handleStatExamManualClick(ActionEvent event) {
+    	
+    	//((Node) event.getSource()).getScene().getWindow().hide(); 
+    	Pane root;
+		try {
+			exmCode = examCodeTxtFld.getText();
+			root = FXMLLoader.load(getClass().getResource("gui/manualExamFx.fxml"));
+			Scene scene = new Scene(root);
+	   		Stage stage = new Stage();
+	   		stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//build the gui
+    	
+
     }
 }
